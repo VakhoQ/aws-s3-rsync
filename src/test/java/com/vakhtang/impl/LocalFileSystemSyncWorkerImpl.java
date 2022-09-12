@@ -2,6 +2,7 @@ package com.vakhtang.impl;
 
 import com.vakhtang.ConfigSyncNode;
 import com.vakhtang.ConfigSyncWorker;
+import com.vakhtang.S3SyncConfigException;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,9 +37,10 @@ public class LocalFileSystemSyncWorkerImpl implements ConfigSyncWorker {
     }
 
     @Override
-    public boolean updateConfig(String source, String sourcePrefix, String key, String LocalDestination) {
-       throw new RuntimeException("not implemented yet");
+    public void update(String remoteLocation, String remoteRelativePath, String localDesFullPath) throws S3SyncConfigException {
+        throw new RuntimeException("Not implemented yet");
     }
+
 
     private void walkRecursion(File file, String parent, List<ConfigSyncNode> list) {
         File [] objects = file.listFiles();

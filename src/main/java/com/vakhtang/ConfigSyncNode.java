@@ -1,16 +1,15 @@
 package com.vakhtang;
 
-public class SyncNode {
+
+public class ConfigSyncNode {
 
     private final String objectKey;
     private final String objectHash;
 
-
-    public SyncNode(String objectKey, String objectHash) {
+    public ConfigSyncNode(String objectKey, String objectHash) {
         this.objectKey = objectKey;
         this.objectHash = objectHash;
     }
-
 
     public String getObjectKey() {
         return objectKey;

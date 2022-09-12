@@ -1,6 +1,6 @@
 package com.vakhtang.impl;
 
-import com.vakhtang.SyncNode;
+import com.vakhtang.ConfigSyncNode;
 import com.vakhtang.ConfigSyncWorker;
 
 import java.io.File;
@@ -17,7 +17,7 @@ import java.util.List;
 public class LocalFileSystemSyncWorkerImpl implements ConfigSyncWorker {
 
     @Override
-    public List<SyncNode> getObjectTree(String rootLocation, String prefix)   {
+    public List<ConfigSyncNode> getObjectTree(String rootLocation, String prefix)   {
 
         String path = rootLocation+"/"+prefix;
 
@@ -29,25 +29,25 @@ public class LocalFileSystemSyncWorkerImpl implements ConfigSyncWorker {
             throw new RuntimeException(e);
         }
 
-        List<SyncNode> list = new ArrayList<>();
+        List<ConfigSyncNode> list = new ArrayList<>();
         walkRecursion(file, prefix, list);
 
         return list;
     }
 
     @Override
-    public boolean updateConfig(String rootLocation, String prefix, String key) {
+    public boolean updateConfig(String source, String sourcePrefix, String key, String LocalDestination) {
        throw new RuntimeException("not implemented yet");
     }
 
-    private void walkRecursion(File file, String parent, List<SyncNode> list) {
+    private void walkRecursion(File file, String parent, List<ConfigSyncNode> list) {
         File [] objects = file.listFiles();
 
         for (File f : objects) {
             if(!f.isDirectory()){
                 String key = parent + "/"+f.getName();
                 String hashCode = getHashCode(f);
-                SyncNode node = new SyncNode(key, hashCode);
+                ConfigSyncNode node = new ConfigSyncNode(key, hashCode);
                 list.add(node);
             }else{
                 walkRecursion(f,parent + "/" +f.getName(), list);
